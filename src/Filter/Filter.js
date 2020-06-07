@@ -12,17 +12,25 @@ class Filter extends Component {
 				'Big ant',
 				'Small dinosaur',
 				'Medium dog'
-			]
+			],
+			results:[]
 		};
+	}
+
+	search(e){
+		let result= this.state.items.filter(item => item.toLowerCase().includes(e.target.value.toLowerCase()))
+		this.setState({
+			results:result
+		})
 	}
 
 	render() {
 		return (
 			<div className="Filter">
 				<p>Filter the list as you type.</p>
-				<input placeholder="Search..." className="Filter__textbox" />
+				<input placeholder="Search..." className="Filter__textbox" onChange={this.search.bind(this)}/>
 				<ul>
-					{this.state.items.map((item, index) => {
+					{this.state.results.map((item, index) => {
 						return <li key={index}>{item}</li>;
 					})}
 				</ul>
